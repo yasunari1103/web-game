@@ -1,0 +1,2 @@
+enchant();
+alert("hard mode");

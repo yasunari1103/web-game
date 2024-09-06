@@ -1,0 +1,3 @@
+enchant();
+
+alert("normal mode");

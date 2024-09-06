@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="enchant.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>素数判定ゲーム！</h1>
+    </div>
+    <button id="easy">easy</button>
+    <button id="normal">normal</button>
+    <button id="hard">hard</button>
+    <button id="very-hard">very hard</button>
+    <button id="special">special</button>
+
+    <script type="text/javascript">
+        const levels = ['easy', 'normal', 'hard', 'very-hard', 'special'];
+
+        levels.forEach(level => {
+            document.getElementById(level).onclick = function () {
+                const script = document.createElement('script');
+                script.type = "text/javascript";
+                script.src = `games/${levels.indexOf(level) + 1}_${level.replace('-', '_')}.js`;
+                document.body.appendChild(script);
+            };
+        });
+    </script>
+</body>
+
+</html>

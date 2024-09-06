@@ -1,0 +1,17 @@
+button {
+  margin: 5px auto;
+  display: block;
+  background: linear-gradient(to bottom, #00acee, #0072e0);
+  color: yellow;
+  padding: 10px 20px;
+  font-size: large;
+}
+button:hover {
+  background: linear-gradient(to bottom, #00acee, #0072e0);
+  color: yellow;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px #cbd6ee;
+}
