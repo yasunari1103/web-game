@@ -26,11 +26,31 @@ game.onload = function () {
   const mainScene = new Scene();
   game.pushScene(mainScene);
   mainScene.backgroundColor = "black";
+const button = new button("button",)
 
-  // 30秒後にゲームを終了するタイマー
-  setTimeout(function () {
+
+////////////////////////////////////////
+  // カウントダウン表示
+  let countdown = 30;
+  const countdownLabel = new Label("Time: " + countdown);
+  countdownLabel.x = 10;
+  countdownLabel.y = 10;
+  countdownLabel.color = "white";
+  countdownLabel.font = "24px sans-serif"
+  mainScene.addChild(countdownLabel);
+
+game.onenterframe = function () {
+  // 一秒ごとにカウントダウンを更新
+  if (game.frame % game.fps === 0 && countdown > 0) {
+    countdown--;
+    countdownLabel.text = "Time: " + countdown;
+  }
+
+  // カウントが0になったらゲームオーバーを表示
+  if (countdown === 0) {
     gameOver();
-  }, 30000); // 30000ミリ秒 = 30秒
+  }
+};
 
   // ゲーム終了時に呼ばれる関数
   function gameOver() {
@@ -43,5 +63,6 @@ game.onload = function () {
     gameOverScene.addChild(label);
     game.replaceScene(gameOverScene); // ゲーム終了シーンに切り替える
   }
+////////////////////////////////////////
 };
 game.start();
