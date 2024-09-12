@@ -8,8 +8,11 @@ game.fps = 30;
 //パーツ準備
 
 //音系統
-const correctSound = game.preload([]);
-const incorrectSound = game.preload([]);
+const correctSound = "決定ボタンを押す40.mp3";
+game.preload([correctSound]);
+
+const incorrectSound = "ビープ音4.mp3";
+game.preload([incorrectSound]);
 
 //イラスト系統
 
@@ -51,7 +54,7 @@ game.onload = function () {
   }
 
   ////////////////////////////////////////
-  //easy modeの設定
+  //very hard modeの設定
   number = getRandomInt(2, 3001);
   const primes = [
     2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
@@ -119,10 +122,12 @@ game.onload = function () {
       point += number; //素数の時ポイント増加
       console.log("correct!");
       pointLabel.text = "point:" + point;
+      game.assets[correctSound].clone().play();
     } else {
       console.log("incorrect!");
       point -= number * 10;
       pointLabel.text = "point:" + point;
+      game.assets[incorrectSound].clone().play();
     }
     number = getRandomInt(2, 3001);
     num.text = number; //素数以外の時ポイント増加
@@ -134,10 +139,12 @@ game.onload = function () {
         point += number; //素数の時ポイント増加
         console.log("correct!");
         pointLabel.text = "point:" + point;
+        game.assets[correctSound].clone().play();
       } else {
         console.log("incorrect!");
         point -= number * 10;
         pointLabel.text = "point:" + point;
+        game.assets[incorrectSound].clone().play();
       }
       number = getRandomInt(2, 3001);
       num.text = number; //素数以外の時ポイント増加
@@ -149,10 +156,12 @@ game.onload = function () {
       console.log("incorrect!");
       point -= number * 10;
       pointLabel.text = "point:" + point;
+      game.assets[incorrectSound].clone().play();
     } else {
       point += number;
       console.log("correct!");
       pointLabel.text = "point:" + point;
+      game.assets[correctSound].clone().play();
     }
     number = getRandomInt(2, 3001);
     num.text = number;
@@ -164,10 +173,12 @@ game.onload = function () {
         console.log("incorrect!");
         point -= number * 10;
         pointLabel.text = "point:" + point;
+        game.assets[incorrectSound].clone().play();
       } else {
         point += number;
         console.log("correct!");
         pointLabel.text = "point:" + point;
+        game.assets[correctSound].clone().play();
       }
       number = getRandomInt(2, 3001);
       num.text = number;

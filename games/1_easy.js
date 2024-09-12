@@ -8,11 +8,12 @@ game.fps = 30;
 //パーツ準備
 
 //音系統
-const correctSound = "";
-game.preload([]);
+//もらったところ => https://soundeffect-lab.info/sound/button/
+const correctSound = "決定ボタンを押す40.mp3";
+game.preload([correctSound]);
 
-const incorrectSound = "";
-game.preload([]);
+const incorrectSound = "ビープ音4.mp3";
+game.preload([incorrectSound]);
 
 //イラスト系統
 
@@ -26,7 +27,7 @@ game.preload([compositeButton]);
 //パーツ準備終わり
 ////////////////////////////////////////
 
-game.onload = function () {
+game.onload = function startGame() {
   //グローバル変数
   let point = 0;
 
@@ -87,10 +88,12 @@ game.onload = function () {
       point += number; //素数の時ポイント増加
       console.log("correct!");
       pointLabel.text = "point:" + point;
+      game.assets[correctSound].clone().play();
     } else {
       console.log("incorrect!");
       point -= number * 10;
       pointLabel.text = "point:" + point;
+      game.assets[incorrectSound].clone().play();
     }
     number = getRandomInt(2, 51);
     num.text = number; //素数以外の時ポイント増加
@@ -102,10 +105,12 @@ game.onload = function () {
         point += number; //素数の時ポイント増加
         console.log("correct!");
         pointLabel.text = "point:" + point;
+        game.assets[correctSound].clone().play();
       } else {
         console.log("incorrect!");
         point -= number * 10;
         pointLabel.text = "point:" + point;
+        game.assets[incorrectSound].clone().play();
       }
       number = getRandomInt(2, 51);
       num.text = number; //素数以外の時ポイント増加
@@ -117,10 +122,12 @@ game.onload = function () {
       console.log("incorrect!");
       point -= number * 10;
       pointLabel.text = "point:" + point;
+      game.assets[incorrectSound].clone().play();
     } else {
       point += number;
       console.log("correct!");
       pointLabel.text = "point:" + point;
+      game.assets[correctSound].clone().play();
     }
     number = getRandomInt(2, 51);
     num.text = number;
@@ -132,10 +139,12 @@ game.onload = function () {
         console.log("incorrect!");
         point -= number * 10;
         pointLabel.text = "point:" + point;
+        game.assets[incorrectSound].clone().play();
       } else {
         point += number;
         console.log("correct!");
         pointLabel.text = "point:" + point;
+        game.assets[correctSound].clone().play();
       }
       number = getRandomInt(2, 51);
       num.text = number;
@@ -169,12 +178,37 @@ game.onload = function () {
     // ゲーム終了シーンを表示するか、スコア表示などを行う
     const gameOverScene = new Scene();
     gameOverScene.backgroundColor = "red"; // ゲーム終了時に背景を赤にする例
+
+    //point表示テキスト
     const label = new Label("Game Over! Your score: " + point);
     label.x = 100;
     label.y = 200;
     gameOverScene.addChild(label);
+
+    //同難易度ボタン
+    const againButton = new Label("again!");
+    againButton.x = 100;
+    againButton.y = 250;
+    gameOverScene.addChild(againButton);
+
+    //ホームに戻るボタン
+    const homebackButton = new Label("back to home");
+    homebackButton.x = 100;
+    homebackButton.y = 300;
+    gameOverScene.addChild(homebackButton);
     game.replaceScene(gameOverScene); // ゲーム終了シーンに切り替える
+
+    //addEventListener系統
+    againButton.addEventListener("touchstart", function () {
+      // もう一度同じ難易度でゲームをスタートさせる処理
+      startGame();
+    });
+    homebackButton.addEventListener("touchstart", function () {
+      // ホーム画面に戻る処理
+      window.location.reload();
+    });
   }
+
   ////////////////////////////////////////
 };
 
