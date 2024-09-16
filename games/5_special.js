@@ -26,7 +26,7 @@ game.preload([compositeButton]);
 //パーツ準備終わり
 ////////////////////////////////////////
 
-game.onload = function () {
+game.onload = function startGame() {
   //グローバル変数
   let point = 0;
 
