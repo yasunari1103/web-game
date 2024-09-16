@@ -8,16 +8,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="index.css">
     <script type="text/javascript" src="enchant.js"></script>
-    <style type="text/css">
-        body {
-            margin: 0;
-            padding: 0;
-        }
-    </style>
 </head>
 
 <body>
-    <div id="container">
+    <div class="container">
         <img id="title" src="タイトル画面.png" alt="">
         <button id="easy"><img src="1.png" alt="easy"></button>
         <button id="normal"><img src="2.png" alt="normal"></button>
@@ -34,6 +28,9 @@
                 script.type = "text/javascript";
                 script.src = `games/${levels.indexOf(level) + 1}_${level.replace('-', '_')}.js`;
                 document.body.appendChild(script);
+                const style = document.createElement('style');
+                style.textContent = ".container {display:none;}";
+                document.head.appendChild(style);
             };
         });
     </script>

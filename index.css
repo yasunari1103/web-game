@@ -1,2 +1,79 @@
 .container {
+  position: relative;
+  display: inline-block;
+}
+.container img {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.container button#easy {
+  height: 10%;
+  width: 10%;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.container button#normal {
+  height: 10%;
+  width: 10%;
+  position: absolute;
+  top: 90%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.container button#hard {
+  height: 10%;
+  width: 10%;
+  position: absolute;
+  top: 90%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.container button#very-hard {
+  height: 10%;
+  width: 10%;
+  position: absolute;
+  top: 90%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.container button#special {
+  height: 10%;
+  width: 10%;
+  position: absolute;
+  top: 90%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
 }
