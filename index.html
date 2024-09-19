@@ -12,13 +12,15 @@
         .container {
             position: relative;
             display: inline-block;
-            display: block;
+            visibility: hidden;
         }
 
         #first_button {
-            height: 50%;
-            width: 50%;
-            visibility: visible;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -50,7 +52,6 @@
     </script>
     <script type="text/javascript">
         const levels = ['easy', 'normal', 'hard', 'very-hard', 'special'];
-
         levels.forEach(level => {
             document.getElementById(level).onclick = function () {
                 const script = document.createElement('script');
