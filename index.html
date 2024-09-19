@@ -8,9 +8,24 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="index.css">
     <script type="text/javascript" src="enchant.js"></script>
+    <style>
+        .container {
+            position: relative;
+            display: inline-block;
+            display: block;
+        }
+
+        #first_button {
+            height: 50%;
+            width: 50%;
+            visibility: visible;
+        }
+    </style>
 </head>
 
 <body>
+    <button id="first_button"><img src="ボタン素材/start.png" alt=""></button><audio id="myAudio" autoplay loop
+        src="music/Loads_of_Primes.wav"></audio>
     <div class="container">
         <img id="title" src="タイトル画面.png" alt="">
         <button id="easy"><img src="1.png" alt="easy"></button>
@@ -19,6 +34,20 @@
         <button id="very-hard"><img src="4.png" alt="very-hard"></button>
         <button id="special"><img src="5.png" alt="special"></button>
     </div>
+    <script>
+        const audio = document.getElementById("myAudio");
+        const playButton = document.getElementById("first_button");
+        const homeScrean = document.getElementsByClassName('container')[0];
+        playButton.addEventListener("click", function () {
+            audio.play().then(() => {
+                audio.volume = 0.1; // 再生後に音量を調整
+                playButton.style.display = "none";
+                homeScrean.style.visibility = "visible";
+            }).catch(function (error) {
+                console.error(error);
+            });
+        });
+    </script>
     <script type="text/javascript">
         const levels = ['easy', 'normal', 'hard', 'very-hard', 'special'];
 
