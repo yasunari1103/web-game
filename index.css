@@ -7,11 +7,11 @@
 .container button#easy {
   height: 10%;
   width: 10%;
-  position: absolute;
-  top: 90%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+  position: absolute; /*位置*/
+  top: 90%; /*位置*/
+  left: 50%; /*位置*/
+  transform: translate(-50%, -50%); /*位置*/
+  background-color: rgba(0, 0, 0, 0); /* 半透明の背景色 */
   color: white;
   border: none;
   padding: 10px;
@@ -21,11 +21,11 @@
 .container button#normal {
   height: 10%;
   width: 10%;
-  position: absolute;
-  top: 90%;
-  left: 60%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+  position: absolute; /*位置*/
+  top: 90%; /*位置*/
+  left: 60%; /*位置*/
+  transform: translate(-50%, -50%); /*位置*/
+  background-color: rgba(0, 0, 0, 0); /* 半透明の背景色 */
   color: white;
   border: none;
   padding: 10px;
@@ -35,11 +35,11 @@
 .container button#hard {
   height: 10%;
   width: 10%;
-  position: absolute;
-  top: 90%;
-  left: 70%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+  position: absolute; /*位置*/
+  top: 90%; /*位置*/
+  left: 70%; /*位置*/
+  transform: translate(-50%, -50%); /*位置*/
+  background-color: rgba(0, 0, 0, 0); /* 半透明の背景色 */
   color: white;
   border: none;
   padding: 10px;
@@ -49,11 +49,11 @@
 .container button#very-hard {
   height: 10%;
   width: 10%;
-  position: absolute;
-  top: 90%;
-  left: 80%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+  position: absolute; /*位置*/
+  top: 90%; /*位置*/
+  left: 80%; /*位置*/
+  transform: translate(-50%, -50%); /*位置*/
+  background-color: rgba(0, 0, 0, 0); /* 半透明の背景色 */
   color: white;
   border: none;
   padding: 10px;
@@ -63,11 +63,11 @@
 .container button#special {
   height: 10%;
   width: 10%;
-  position: absolute;
-  top: 90%;
-  left: 90%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+  position: absolute; /*位置*/
+  top: 90%; /*位置*/
+  left: 90%; /*位置*/
+  transform: translate(-50%, -50%); /*位置*/
+  background-color: rgba(0, 0, 0, 0); /* 半透明の背景色 */
   color: white;
   border: none;
   padding: 10px;
