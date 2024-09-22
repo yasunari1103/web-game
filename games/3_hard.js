@@ -1,20 +1,21 @@
 enchant();
 
 //画面サイズ,設定
-const game = new Game(400, 500);
+const game = new Game(625, 441);
 game.fps = 30;
 
 ////////////////////////////////////////
 //パーツ準備
 
 //音系統
-const correctSound = "決定ボタンを押す40.mp3";
+const correctSound = "SE/seikaiSE.wav";
 game.preload([correctSound]);
 
-const incorrectSound = "ビープ音4.mp3";
+const incorrectSound = "SE/huseikaiSE.wav";
 game.preload([incorrectSound]);
 
 //イラスト系統
+const gameBackGround = "背景素材/ゲーム画面.png";
 
 //ボタン系統
 const primeButton = "素数ボタン.png";
@@ -29,20 +30,18 @@ game.preload([compositeButton]);
 game.onload = function startGame() {
   //グローバル変数
   let point = 0;
+  let result = [];
 
   const mainScene = new Scene();
   game.pushScene(mainScene);
   mainScene.backgroundColor = "black";
 
   //ポイント表示
-  const pointLabel = new Label("point: 0");
-  pointLabel.x = 175;
-  pointLabel.y = 5;
+  const pointLabel = new Label("Point: 0");
+  pointLabel.x = 10;
+  pointLabel.y = 35;
   pointLabel.font = "24px sans-serif";
   pointLabel.color = "white";
-  pointLabel.textAlign = "center";
-  pointLabel.style = { borderRadius: "10px" };
-  pointLabel.padding = "10px";
   mainScene.addChild(pointLabel);
 
   ////////////////////////////////////////
@@ -79,11 +78,15 @@ game.onload = function startGame() {
 
   //ボタン作成
   const correctButton = new Sprite(200, 200);
+  correctButton.height = 100;
+  correctButton.width = 100;
   correctButton.moveTo(200, 300);
   correctButton.image = game.assets[primeButton];
   mainScene.addChild(correctButton);
 
   const incorrectButton = new Sprite(200, 200);
+  incorrectButton.height = 100;
+  incorrectButton.width = 100;
   incorrectButton.moveTo(0, 300);
   incorrectButton.image = game.assets[compositeButton];
   mainScene.addChild(incorrectButton);
@@ -93,13 +96,15 @@ game.onload = function startGame() {
   correctButton.addEventListener("touchstart", function () {
     if (primes.includes(number)) {
       point += number; //素数の時ポイント増加
+      result.push({ [number]: "〇(素数)" });
       console.log("correct!");
-      pointLabel.text = "point:" + point;
+      pointLabel.text = "Point: " + point;
       game.assets[correctSound].clone().play();
     } else {
       console.log("incorrect!");
+      result.push({ [number]: "✕(合成数)" });
       point -= number * 10;
-      pointLabel.text = "point:" + point;
+      pointLabel.text = "Point: " + point;
       game.assets[incorrectSound].clone().play();
     }
     number = getRandomInt(2, 501);
@@ -107,33 +112,39 @@ game.onload = function startGame() {
   });
   //Pキーが押されたら実行
   document.addEventListener("keydown", (event) => {
-    if (event.code === "KeyP") {
-      if (primes.includes(number)) {
-        point += number; //素数の時ポイント増加
-        console.log("correct!");
-        pointLabel.text = "point:" + point;
-        game.assets[correctSound].clone().play();
-      } else {
-        console.log("incorrect!");
-        point -= number * 10;
-        pointLabel.text = "point:" + point;
-        game.assets[incorrectSound].clone().play();
+    if (countdown > 0) {
+      if (event.code === "KeyP") {
+        if (primes.includes(number)) {
+          point += number; //素数の時ポイント増加
+          result.push({ [number]: "〇(素数)" });
+          console.log("correct!");
+          pointLabel.text = "Point: " + point;
+          game.assets[correctSound].clone().play();
+        } else {
+          console.log("incorrect!");
+          result.push({ [number]: "✕(合成数)" });
+          point -= number * 10;
+          pointLabel.text = "Point: " + point;
+          game.assets[incorrectSound].clone().play();
+        }
+        number = getRandomInt(2, 501);
+        num.text = number; //素数以外の時ポイント増加
       }
-      number = getRandomInt(2, 501);
-      num.text = number; //素数以外の時ポイント増加
     }
   });
   /////////////////////////////////////////////////////////////////////////
   incorrectButton.addEventListener("touchstart", function () {
     if (primes.includes(number)) {
+      result.push({ [number]: "✕(素数)" });
       console.log("incorrect!");
       point -= number * 10;
-      pointLabel.text = "point:" + point;
+      pointLabel.text = "Point: " + point;
       game.assets[incorrectSound].clone().play();
     } else {
       point += number;
       console.log("correct!");
-      pointLabel.text = "point:" + point;
+      result.push({ [number]: "〇(合成数)" });
+      pointLabel.text = "Point: " + point;
       game.assets[correctSound].clone().play();
     }
     number = getRandomInt(2, 501);
@@ -141,20 +152,24 @@ game.onload = function startGame() {
   });
   //Cキーが押されたら実行
   document.addEventListener("keydown", (event) => {
-    if (event.code === "KeyC") {
-      if (primes.includes(number)) {
-        console.log("incorrect!");
-        point -= number * 10;
-        pointLabel.text = "point:" + point;
-        game.assets[incorrectSound].clone().play();
-      } else {
-        point += number;
-        console.log("correct!");
-        pointLabel.text = "point:" + point;
-        game.assets[correctSound].clone().play();
+    if (countdown > 0) {
+      if (event.code === "KeyC") {
+        if (primes.includes(number)) {
+          result.push({ [number]: "✕(素数)" });
+          console.log("incorrect!");
+          point -= number * 10;
+          pointLabel.text = "Point: " + point;
+          game.assets[incorrectSound].clone().play();
+        } else {
+          point += number;
+          console.log("correct!");
+          result.push({ [number]: "〇(合成数)" });
+          pointLabel.text = "Point: " + point;
+          game.assets[correctSound].clone().play();
+        }
+        number = getRandomInt(2, 501);
+        num.text = number;
       }
-      number = getRandomInt(2, 501);
-      num.text = number;
     }
   });
   /////////////////////////////////////////////////////////////////////////
@@ -187,6 +202,17 @@ game.onload = function startGame() {
     const gameOverScene = new Scene();
     gameOverScene.backgroundColor = "red"; // ゲーム終了時に背景を赤にする例
 
+    //リザルト表示テキスト
+    resultText = "";
+    result.forEach((element) =>
+      Object.keys(element).forEach(function (value) {
+        resultText += value + ":" + this[value] + "  ";
+      }, element)
+    );
+    const resultLabel = new Label(resultText);
+    resultLabel.x = 0;
+    resultLabel.y = 0;
+    gameOverScene.addChild(resultLabel);
     //point表示テキスト
     const label = new Label("Game Over! Your score: " + point);
     label.x = 100;
