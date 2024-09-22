@@ -18,7 +18,7 @@ game.preload([incorrectSound]);
 const gameBackGround = "背景素材/ゲーム画面.png"; // 7016 * 4961
 game.preload([gameBackGround]);
 
-const sd = "sdキャラ素材/笑顔.png"; // 2111 * 3129
+const sd = "sdキャラ素材/笑顔.png"; // 211 * 313
 game.preload([sd]);
 
 //ボタン系統
@@ -57,11 +57,9 @@ game.onload = function startGame() {
   mainScene.addChild(BackGround);
 
   //sdイラスト
-  var sdIllust = new Sprite(211, 312);
+  var sdIllust = new Sprite(211, 313);
   sdIllust.moveTo(15, 95);
-  const surfaceSdIllust = new Surface(211, 312);
-  surfaceSdIllust.draw(game.assets[sd], 0, 0, 2111, 3129, 0, 0, 211, 312);
-  sdIllust.image = surfaceSdIllust;
+  sdIllust.image = game.assets[sd];
   mainScene.addChild(sdIllust);
 
   //ポイント表示
