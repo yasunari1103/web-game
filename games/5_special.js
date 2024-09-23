@@ -279,8 +279,10 @@ game.onload = function startGame() {
     num.x = 420 - num.width / 2;
     num.y = 160 - num.height / 2;
     primeButton.image = surfacePrimeSelected;
+    sdIllust.y -= 10;
     setTimeout(() => {
       primeButton.image = surfacePrime;
+      sdIllust.y += 10;
     }, 100);
   });
   //Pキーが押されたら実行
@@ -309,8 +311,10 @@ game.onload = function startGame() {
         num.x = 420 - num.width / 2;
         num.y = 160 - num.height / 2;
         primeButton.image = surfacePrimeSelected;
+        sdIllust.y -= 10;
         setTimeout(() => {
           primeButton.image = surfacePrime;
+          sdIllust.y += 10;
         }, 100);
       }
     }
@@ -339,8 +343,10 @@ game.onload = function startGame() {
     num.x = 420 - num.width / 2;
     num.y = 160 - num.height / 2;
     compositeButton.image = surfaceCompositeSelected;
+    sdIllust.y -= 10;
     setTimeout(() => {
       compositeButton.image = surfaceComposite;
+      sdIllust.y += 10;
     }, 100);
   });
   //Cキーが押されたら実行
@@ -369,8 +375,10 @@ game.onload = function startGame() {
         num.x = 420 - num.width / 2;
         num.y = 160 - num.height / 2;
         compositeButton.image = surfaceCompositeSelected;
+        sdIllust.y -= 10;
         setTimeout(() => {
           compositeButton.image = surfaceComposite;
+          sdIllust.y += 10;
         }, 100);
       }
     }
