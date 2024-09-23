@@ -15,14 +15,24 @@ const incorrectSound = "SE/huseikaiSE.wav";
 game.preload([incorrectSound]);
 
 //イラスト系統
-const gameBackGround = "背景素材/ゲーム画面.png";
+const gameBackGround = "背景素材/ゲーム画面.png"; // 7016 * 4961
+game.preload([gameBackGround]);
+
+const sd = "sdキャラ素材/ジト目.png"; // 211 * 313
+game.preload([sd]);
 
 //ボタン系統
-const primeButton = "素数ボタン.png";
-game.preload([primeButton]);
+const prime = "ボタン素材/素数.png"; // 2192 * 1450
+game.preload([prime]);
 
-const compositeButton = "合成数ボタン.png";
-game.preload([compositeButton]);
+const primeSelected = "ボタン素材/素数(選択時).png"; // 2192 * 1450
+game.preload([primeSelected]);
+
+const composite = "ボタン素材/合成数.png"; // 2192 * 1450
+game.preload([composite]);
+
+const compositeSelected = "ボタン素材/合成数(選択時).png"; // 2192 * 1450
+game.preload([compositeSelected]);
 
 //パーツ準備終わり
 ////////////////////////////////////////
@@ -36,10 +46,32 @@ game.onload = function startGame() {
   game.pushScene(mainScene);
   mainScene.backgroundColor = "black";
 
+  var BackGround = new Sprite(625, 441);
+  const surfaceBackGround = new Surface(625, 441); // 縮小後のサイズでSurfaceを作成
+  surfaceBackGround.draw(
+    game.assets[gameBackGround],
+    0,
+    0,
+    7016,
+    4961,
+    0,
+    0,
+    625,
+    441
+  );
+  BackGround.image = surfaceBackGround;
+  mainScene.addChild(BackGround);
+
+  //sdイラスト
+  var sdIllust = new Sprite(211, 313);
+  sdIllust.moveTo(15, 95);
+  sdIllust.image = game.assets[sd];
+  mainScene.addChild(sdIllust);
+
   //ポイント表示
-  const pointLabel = new Label("Point: " + point);
-  pointLabel.x = 10;
-  pointLabel.y = 35;
+  const pointLabel = new Label("0");
+  pointLabel.x = 115;
+  pointLabel.y = 69;
   pointLabel.font = "24px sans-serif";
   pointLabel.color = "white";
   mainScene.addChild(pointLabel);
@@ -60,51 +92,98 @@ game.onload = function startGame() {
     73, 79, 83, 89, 97,
   ];
 
-  //数字
-  const num = new Label(number + "");
-  num.x = 100;
-  num.y = 50;
-  num.font = "24px sans-serif";
+  //数字を入れる予定のLabel
+  const num = new Label("");
+  num.font = "120px sans-serif";
   num.color = "white";
-  num.backgroundColor = "blue";
-  num.textAlign = "center";
-  num.style = { borderRadius: "10px" };
-  num.padding = "10px";
   mainScene.addChild(num);
 
-  //ボタン作成
-  const correctButton = new Sprite(200, 200);
-  correctButton.height = 100;
-  correctButton.width = 100;
-  correctButton.moveTo(200, 300);
-  correctButton.image = game.assets[primeButton];
-  mainScene.addChild(correctButton);
+  //数字を代入
+  num.text = number;
 
-  const incorrectButton = new Sprite(200, 200);
-  incorrectButton.height = 100;
-  incorrectButton.width = 100;
-  incorrectButton.moveTo(0, 300);
-  incorrectButton.image = game.assets[compositeButton];
-  mainScene.addChild(incorrectButton);
+  num.width = num._boundWidth; // テキストの幅を更新
+  num.height = num._boundHeight; // テキストの高さを更新
+
+  num.x = 420 - num.width / 2;
+  num.y = 160 - num.height / 2;
+
+  //ボタン作成
+  var primeButton = new Sprite(200, 130);
+  primeButton.moveTo(405, 275);
+  const surfacePrime = new Surface(200, 130);
+  const surfacePrimeSelected = new Surface(200, 130);
+  surfacePrime.draw(game.assets[prime], 0, 0, 2192, 1450, 0, 0, 200, 130); //scale使えないからsurfaceを使って描画した
+  surfacePrimeSelected.draw(
+    game.assets[primeSelected],
+    0,
+    0,
+    2192,
+    1450,
+    0,
+    0,
+    200,
+    130
+  ); //scale使えないからsurfaceを使って描画した
+  primeButton.image = surfacePrime;
+  mainScene.addChild(primeButton);
+
+  var compositeButton = new Sprite(200, 130);
+  compositeButton.moveTo(195, 275);
+  const surfaceComposite = new Surface(200, 130);
+  const surfaceCompositeSelected = new Surface(200, 130);
+  surfaceComposite.draw(
+    game.assets[composite],
+    0,
+    0,
+    2192,
+    1450,
+    0,
+    0,
+    200,
+    130
+  );
+  surfaceCompositeSelected.draw(
+    game.assets[compositeSelected],
+    0,
+    0,
+    2192,
+    1450,
+    0,
+    0,
+    200,
+    130
+  ); //scale使えないからsurfaceを使って描画した
+  compositeButton.image = surfaceComposite;
+  mainScene.addChild(compositeButton);
 
   // ボタンクリック時の処理
   /////////////////////////////////////////////////////////////////////////
-  correctButton.addEventListener("touchstart", function () {
+  primeButton.addEventListener("touchstart", function () {
     if (primes.includes(number)) {
       point += number; //素数の時ポイント増加
       result.push({ [number]: "〇(素数)" });
       console.log("correct!");
-      pointLabel.text = "Point: " + point;
+      pointLabel.text = "" + point;
       game.assets[correctSound].clone().play();
     } else {
       console.log("incorrect!");
       result.push({ [number]: "✕(合成数)" });
       point -= number * 10;
-      pointLabel.text = "Point: " + point;
+      pointLabel.text = "" + point;
       game.assets[incorrectSound].clone().play();
     }
     number = getRandomInt(2, 101);
-    num.text = number; //素数以外の時ポイント増加
+    num.text = number;
+
+    num.width = num._boundWidth; // テキストの幅を更新
+    num.height = num._boundHeight; // テキストの高さを更新
+
+    num.x = 420 - num.width / 2;
+    num.y = 160 - num.height / 2;
+    primeButton.image = surfacePrimeSelected;
+    setTimeout(() => {
+      primeButton.image = surfacePrime;
+    }, 100);
   });
   //Pキーが押されたら実行
   document.addEventListener("keydown", (event) => {
@@ -112,59 +191,89 @@ game.onload = function startGame() {
       if (event.code === "KeyP") {
         if (primes.includes(number)) {
           point += number; //素数の時ポイント増加
-          result.push({ [number]: "〇(素数)" });
           console.log("correct!");
-          pointLabel.text = "Point: " + point;
+          result.push({ [number]: "〇(素数)" });
+          pointLabel.text = "" + point;
           game.assets[correctSound].clone().play();
         } else {
           console.log("incorrect!");
           result.push({ [number]: "✕(合成数)" });
           point -= number * 10;
-          pointLabel.text = "Point: " + point;
+          pointLabel.text = "" + point;
           game.assets[incorrectSound].clone().play();
         }
         number = getRandomInt(2, 101);
-        num.text = number; //素数以外の時ポイント増加
+        num.text = number;
+
+        num.width = num._boundWidth; // テキストの幅を更新
+        num.height = num._boundHeight; // テキストの高さを更新
+
+        num.x = 420 - num.width / 2;
+        num.y = 160 - num.height / 2;
+        primeButton.image = surfacePrimeSelected;
+        setTimeout(() => {
+          primeButton.image = surfacePrime;
+        }, 100);
       }
     }
   });
   /////////////////////////////////////////////////////////////////////////
-  incorrectButton.addEventListener("touchstart", function () {
+  compositeButton.addEventListener("touchstart", function () {
     if (primes.includes(number)) {
       result.push({ [number]: "✕(素数)" });
       console.log("incorrect!");
       point -= number * 10;
-      pointLabel.text = "Point: " + point;
+      pointLabel.text = "" + point;
       game.assets[incorrectSound].clone().play();
     } else {
       point += number;
       console.log("correct!");
       result.push({ [number]: "〇(合成数)" });
-      pointLabel.text = "Point: " + point;
+      pointLabel.text = "" + point;
       game.assets[correctSound].clone().play();
     }
     number = getRandomInt(2, 101);
     num.text = number;
+
+    num.width = num._boundWidth; // テキストの幅を更新
+    num.height = num._boundHeight; // テキストの高さを更新
+
+    num.x = 420 - num.width / 2;
+    num.y = 160 - num.height / 2;
+    compositeButton.image = surfaceCompositeSelected;
+    setTimeout(() => {
+      compositeButton.image = surfaceComposite;
+    }, 100);
   });
   //Cキーが押されたら実行
   document.addEventListener("keydown", (event) => {
-    if (countdown !== 0) {
+    if (countdown > 0) {
       if (event.code === "KeyC") {
         if (primes.includes(number)) {
           result.push({ [number]: "✕(素数)" });
           console.log("incorrect!");
           point -= number * 10;
-          pointLabel.text = "Point: " + point;
+          pointLabel.text = "" + point;
           game.assets[incorrectSound].clone().play();
         } else {
           point += number;
-          console.log("correct!");
           result.push({ [number]: "〇(合成数)" });
-          pointLabel.text = "Point: " + point;
+          console.log("correct!");
+          pointLabel.text = "" + point;
           game.assets[correctSound].clone().play();
         }
         number = getRandomInt(2, 101);
         num.text = number;
+
+        num.width = num._boundWidth; // テキストの幅を更新
+        num.height = num._boundHeight; // テキストの高さを更新
+
+        num.x = 420 - num.width / 2;
+        num.y = 160 - num.height / 2;
+        compositeButton.image = surfaceCompositeSelected;
+        setTimeout(() => {
+          compositeButton.image = surfaceComposite;
+        }, 100);
       }
     }
   });
@@ -172,9 +281,9 @@ game.onload = function startGame() {
 
   // カウントダウン表示
   let countdown = 30;
-  const countdownLabel = new Label("Time: " + countdown);
-  countdownLabel.x = 10;
-  countdownLabel.y = 10;
+  const countdownLabel = new Label("" + countdown);
+  countdownLabel.x = 102;
+  countdownLabel.y = 43;
   countdownLabel.color = "white";
   countdownLabel.font = "24px sans-serif";
   mainScene.addChild(countdownLabel);
@@ -183,7 +292,7 @@ game.onload = function startGame() {
     // 一秒ごとにカウントダウンを更新
     if (game.frame % game.fps === 0 && countdown > 0) {
       countdown--;
-      countdownLabel.text = "Time: " + countdown;
+      countdownLabel.text = "" + countdown;
     }
 
     // カウントが0になったらゲームオーバーを表示
