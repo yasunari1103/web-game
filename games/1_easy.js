@@ -25,8 +25,14 @@ game.preload([sd]);
 const prime = "ボタン素材/素数.png"; // 2192 * 1450
 game.preload([prime]);
 
+const primeSelected = "ボタン素材/素数(選択時).png"; // 2192 * 1450
+game.preload([primeSelected]);
+
 const composite = "ボタン素材/合成数.png"; // 2192 * 1450
 game.preload([composite]);
+
+const compositeSelected = "ボタン素材/合成数(選択時).png"; // 2192 * 1450
+game.preload([compositeSelected]);
 
 //パーツ準備終わり
 ////////////////////////////////////////
@@ -102,15 +108,39 @@ game.onload = function startGame() {
   var primeButton = new Sprite(200, 130);
   primeButton.moveTo(405, 275);
   const surfacePrime = new Surface(200, 130);
+  const surfacePrimeSelected = new Surface(200, 130);
   surfacePrime.draw(game.assets[prime], 0, 0, 2192, 1450, 0, 0, 200, 130); //scale使えないからsurfaceを使って描画した
+  surfacePrimeSelected.draw(
+    game.assets[primeSelected],
+    0,
+    0,
+    2192,
+    1450,
+    0,
+    0,
+    200,
+    130
+  ); //scale使えないからsurfaceを使って描画した
   primeButton.image = surfacePrime;
   mainScene.addChild(primeButton);
 
   var compositeButton = new Sprite(200, 130);
   compositeButton.moveTo(195, 275);
   const surfaceComposite = new Surface(200, 130);
+  const surfaceCompositeSelected = new Surface(200, 130);
   surfaceComposite.draw(
     game.assets[composite],
+    0,
+    0,
+    2192,
+    1450,
+    0,
+    0,
+    200,
+    130
+  );
+  surfaceCompositeSelected.draw(
+    game.assets[compositeSelected],
     0,
     0,
     2192,
@@ -147,6 +177,10 @@ game.onload = function startGame() {
 
     num.x = 420 - num.width / 2;
     num.y = 160 - num.height / 2;
+    primeButton.image = surfacePrimeSelected;
+    setTimeout(() => {
+      primeButton.image = surfacePrime;
+    }, 100);
   });
   //Pキーが押されたら実行
   document.addEventListener("keydown", (event) => {
@@ -173,6 +207,10 @@ game.onload = function startGame() {
 
         num.x = 420 - num.width / 2;
         num.y = 160 - num.height / 2;
+        primeButton.image = surfacePrimeSelected;
+        setTimeout(() => {
+          primeButton.image = surfacePrime;
+        }, 100);
       }
     }
   });
@@ -199,6 +237,10 @@ game.onload = function startGame() {
 
     num.x = 420 - num.width / 2;
     num.y = 160 - num.height / 2;
+    compositeButton.image = surfaceCompositeSelected;
+    setTimeout(() => {
+      compositeButton.image = surfaceComposite;
+    }, 100);
   });
   //Cキーが押されたら実行
   document.addEventListener("keydown", (event) => {
@@ -225,6 +267,10 @@ game.onload = function startGame() {
 
         num.x = 420 - num.width / 2;
         num.y = 160 - num.height / 2;
+        compositeButton.image = surfaceCompositeSelected;
+        setTimeout(() => {
+          compositeButton.image = surfaceComposite;
+        }, 100);
       }
     }
   });
