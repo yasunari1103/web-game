@@ -5,6 +5,8 @@
 }
 
 .container button#easy {
+  padding: 0%;
+  margin: 0%;
   height: 20%;
   width: 15%;
   position: absolute; /*位置*/
@@ -14,11 +16,12 @@
   background-color: rgba(0, 0, 0, 0); /* 半透明の背景色 */
   color: white;
   border: none;
-  padding: 10px;
   cursor: pointer;
 }
 
 .container button#normal {
+  padding: 0%;
+  margin: 0%;
   height: 20%;
   width: 15%;
   position: absolute; /*位置*/
@@ -28,11 +31,12 @@
   background-color: rgba(0, 0, 0, 0); /* 半透明の背景色 */
   color: white;
   border: none;
-  padding: 10px;
   cursor: pointer;
 }
 
 .container button#hard {
+  padding: 0%;
+  margin: 0%;
   height: 20%;
   width: 15%;
   position: absolute; /*位置*/
@@ -42,11 +46,12 @@
   background-color: rgba(0, 0, 0, 0); /* 半透明の背景色 */
   color: white;
   border: none;
-  padding: 10px;
   cursor: pointer;
 }
 
 .container button#very-hard {
+  padding: 0%;
+  margin: 0%;
   height: 20%;
   width: 15%;
   position: absolute; /*位置*/
@@ -56,11 +61,12 @@
   background-color: rgba(0, 0, 0, 0); /* 半透明の背景色 */
   color: white;
   border: none;
-  padding: 10px;
   cursor: pointer;
 }
 
 .container button#special {
+  padding: 0%;
+  margin: 0%;
   height: 20%;
   width: 15%;
   position: absolute; /*位置*/
@@ -70,6 +76,5 @@
   background-color: rgba(0, 0, 0, 0); /* 半透明の背景色 */
   color: white;
   border: none;
-  padding: 10px;
   cursor: pointer;
 }
