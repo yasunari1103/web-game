@@ -1,7 +1,7 @@
 enchant();
 
 //画面サイズ,設定
-const game = new Game(7016,4961);
+const game = new Game(625, 441);
 game.fps = 30;
 
 ////////////////////////////////////////
@@ -46,14 +46,25 @@ game.onload = function startGame() {
   game.pushScene(mainScene);
   mainScene.backgroundColor = "black";
 
-  var BackGround = new Sprite(7016,4961);
-
-  BackGround.image =  game.assets[gameBackGround];
+  var BackGround = new Sprite(625, 441);
+  const surfaceBackGround = new Surface(625, 441); // 縮小後のサイズでSurfaceを作成
+  surfaceBackGround.draw(
+    game.assets[gameBackGround],
+    0,
+    0,
+    7016,
+    4961,
+    0,
+    0,
+    625,
+    441
+  );
+  BackGround.image = surfaceBackGround;
   mainScene.addChild(BackGround);
 
   //sdイラスト
-  var sdIllust = new Sprite(2114,3125);
-  sdIllust.moveTo();
+  var sdIllust = new Sprite(211, 313);
+  sdIllust.moveTo(15, 95);
   sdIllust.image = game.assets[sd];
   mainScene.addChild(sdIllust);
 
@@ -94,14 +105,52 @@ game.onload = function startGame() {
   num.y = 160 - num.height / 2;
 
   //ボタン作成
-  var primeButton = new Sprite(2192,1450);
+  var primeButton = new Sprite(200, 130);
   primeButton.moveTo(405, 275);
-  primeButton.image = game.assets[prime];
+  const surfacePrime = new Surface(200, 130);
+  const surfacePrimeSelected = new Surface(200, 130);
+  surfacePrime.draw(game.assets[prime], 0, 0, 2192, 1450, 0, 0, 200, 130); //scale使えないからsurfaceを使って描画した
+  surfacePrimeSelected.draw(
+    game.assets[primeSelected],
+    0,
+    0,
+    2192,
+    1450,
+    0,
+    0,
+    200,
+    130
+  ); //scale使えないからsurfaceを使って描画した
+  primeButton.image = surfacePrime;
   mainScene.addChild(primeButton);
 
-  var compositeButton = new Sprite(2192,1450);
+  var compositeButton = new Sprite(200, 130);
   compositeButton.moveTo(195, 275);
-  compositeButton.image = game.assets[composite];
+  const surfaceComposite = new Surface(200, 130);
+  const surfaceCompositeSelected = new Surface(200, 130);
+  surfaceComposite.draw(
+    game.assets[composite],
+    0,
+    0,
+    2192,
+    1450,
+    0,
+    0,
+    200,
+    130
+  );
+  surfaceCompositeSelected.draw(
+    game.assets[compositeSelected],
+    0,
+    0,
+    2192,
+    1450,
+    0,
+    0,
+    200,
+    130
+  ); //scale使えないからsurfaceを使って描画した
+  compositeButton.image = surfaceComposite;
   mainScene.addChild(compositeButton);
 
   // ボタンクリック時の処理
@@ -128,10 +177,10 @@ game.onload = function startGame() {
 
     num.x = 420 - num.width / 2;
     num.y = 160 - num.height / 2;
-    primeButton.image = game.assets[primeSelected];
+    primeButton.image = surfacePrimeSelected;
     sdIllust.y -= 10;
     setTimeout(() => {
-      primeButton.image = game.assets[prime];
+      primeButton.image = surfacePrime;
       sdIllust.y += 10;
     }, 100);
   });
@@ -237,10 +286,10 @@ game.onload = function startGame() {
   // カウントダウン表示
   let countdown = 30;
   const countdownLabel = new Label("" + countdown);
-  countdownLabel.x = 1122;
-  countdownLabel.y = 473;
+  countdownLabel.x = 102;
+  countdownLabel.y = 43;
   countdownLabel.color = "white";
-  countdownLabel.font = "264px sans-serif";
+  countdownLabel.font = "24px sans-serif";
   mainScene.addChild(countdownLabel);
 
   game.onenterframe = function () {
