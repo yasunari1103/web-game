@@ -4,10 +4,6 @@
   width: 100%;
 }
 
-canvas{
-  image-rendering: pixelated;
-}
-
 .container button#easy {
   padding: 0%;
   margin: 0%;
