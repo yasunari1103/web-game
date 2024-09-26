@@ -18,7 +18,7 @@ game.preload([incorrectSound]);
 const gameBackGround = "背景素材/ゲーム画面.png"; // 7016 * 4961
 game.preload([gameBackGround]);
 
-const sd = "sdキャラ素材/煽り.png"; // 211 * 313
+const sd = "sdキャラ素材/笑顔.png"; // 211 * 313
 game.preload([sd]);
 
 //ボタン系統
