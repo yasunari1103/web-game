@@ -284,7 +284,7 @@ game.onload = function startGame() {
   });
   /////////////////////////////////////////////////////////////////////////
   // カウントダウン表示
-  let countdown = 30;
+  let countdown = 2;
   const countdownLabel = new Label("" + countdown);
   countdownLabel.x = 102;
   countdownLabel.y = 43;
@@ -307,53 +307,16 @@ game.onload = function startGame() {
 
   // ゲーム終了時に呼ばれる関数
   function gameOver() {
+    game.stop();
+    game.popScene();
     let resultImage = document.createElement("img");
     resultImage.src = "背景素材/result画面.png";
-
-    // ゲーム終了シーンを表示するか、スコア表示などを行う
-    const gameOverScene = new Scene();
-    gameOverScene.backgroundColor = "red"; // ゲーム終了時に背景を赤にする例
-
-    //リザルト表示テキスト
-    resultText = "";
-    result.forEach((element) =>
-      Object.keys(element).forEach(function (value) {
-        resultText += value + ":" + this[value] + "  ";
-      }, element)
-    );
-    const resultLabel = new Label(resultText);
-    resultLabel.x = 0;
-    resultLabel.y = 0;
-    gameOverScene.addChild(resultLabel);
-
-    //point表示テキスト
-    const label = new Label("Game Over! Your score: " + point);
-    label.x = 100;
-    label.y = 200;
-    gameOverScene.addChild(label);
-
-    //同難易度ボタン
-    const againButton = new Label("again!");
-    againButton.x = 100;
-    againButton.y = 250;
-    gameOverScene.addChild(againButton);
-
-    //ホームに戻るボタン
-    const homebackButton = new Label("back to home");
-    homebackButton.x = 100;
-    homebackButton.y = 300;
-    gameOverScene.addChild(homebackButton);
-    game.replaceScene(gameOverScene); // ゲーム終了シーンに切り替える
-
-    //addEventListener系統
-    againButton.addEventListener("touchstart", function () {
-      // もう一度同じ難易度でゲームをスタートさせる処理
-      startGame();
-    });
-    homebackButton.addEventListener("touchstart", function () {
-      // ホーム画面に戻る処理
-      window.location.reload();
-    });
+    resultImage.id = "resultImage";
+    resultImage.style.width = "100%";
+    resultImage.style.padding = "0";
+    resultImage.style.margin = "0";
+    let body = document.body;
+    body.appendChild(resultImage);
   }
 
   ////////////////////////////////////////
