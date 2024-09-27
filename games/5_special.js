@@ -1,5 +1,6 @@
 enchant();
-
+const aaa=globalVars.maxNum;
+console.log(aaa);
 //画面サイズ,設定
 const game = new Game(625, 441);
 game.fps = 30;
@@ -86,7 +87,7 @@ game.onload = function startGame() {
 
   ////////////////////////////////////////
   //special modeの設定
-  number = getRandomInt(2, 10001);
+  number = getRandomInt(2, aaa);
   const primes = [
     2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
     73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151,
@@ -270,7 +271,7 @@ game.onload = function startGame() {
       pointLabel.text = "" + point;
       game.assets[incorrectSound].clone().play();
     }
-    number = getRandomInt(2, 10001);
+    number = getRandomInt(2, aaa);
     num.text = number;
 
     num.width = num._boundWidth; // テキストの幅を更新
@@ -302,7 +303,7 @@ game.onload = function startGame() {
           pointLabel.text = "" + point;
           game.assets[incorrectSound].clone().play();
         }
-        number = getRandomInt(2, 10001);
+        number = getRandomInt(2, aaa);
         num.text = number;
 
         num.width = num._boundWidth; // テキストの幅を更新
@@ -334,7 +335,7 @@ game.onload = function startGame() {
       pointLabel.text = "" + point;
       game.assets[correctSound].clone().play();
     }
-    number = getRandomInt(2, 10001);
+    number = getRandomInt(2, aaa);
     num.text = number;
 
     num.width = num._boundWidth; // テキストの幅を更新
@@ -366,7 +367,7 @@ game.onload = function startGame() {
           pointLabel.text = "" + point;
           game.assets[correctSound].clone().play();
         }
-        number = getRandomInt(2, 10001);
+        number = getRandomInt(2, aaa);
         num.text = number;
 
         num.width = num._boundWidth; // テキストの幅を更新

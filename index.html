@@ -63,18 +63,27 @@
         });
     </script>
     <script type="text/javascript">
-        const levels = ['easy', 'normal', 'hard', 'very-hard', 'special'];
+        
+        const globalVars = {
+            maxNum: null
+    };
+        const levels = [['easy',51], ['normal',101],[ 'hard',501],[ 'very-hard',3001],[ 'special',10001]];
         levels.forEach(level => {
-            document.getElementById(level).onclick = function () {
+            document.getElementById(level[0]).onclick = function () {
+                globalVars.maxNum=level[1];
                 const script = document.createElement('script');
                 script.type = "text/javascript";
-                script.src = `games/${levels.indexOf(level) + 1}_${level.replace('-', '_')}.js`;
+                script.src = "games/5_special.js";
                 document.body.appendChild(script);
                 const style = document.createElement('style');
+            
                 style.textContent = ".container {display:none;}";
                 document.head.appendChild(style);
+            
             };
         });
+    console.log(globalVars.maxNum)
+
     </script>
 </body>
 
