@@ -317,9 +317,10 @@ function startGame() {
     resultImage.style.margin = "0";
     let body = document.body;
     body.appendChild(resultImage);
-  }
+  
+    game.onload = startGame;
+    game.start();
+   }
 
   ////////////////////////////////////////
 }
-game.onload = startGame;
-game.start();

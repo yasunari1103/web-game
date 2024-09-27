@@ -54,9 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
           location.reload();
         };
         retryButton.onclick = function () {
-          const game = new Game(625, 441);
-          game.onload = startGame;
-          game.start();
+        const game = new Game(625, 441);
+        game.onload = startGame;
+        game.start();
         };
 
         document.body.appendChild(div);
