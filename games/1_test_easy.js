@@ -37,7 +37,7 @@ game.preload([compositeSelected]);
 //パーツ準備終わり
 ////////////////////////////////////////
 
-game.onload = function startGame() {
+function startGame() {
   //グローバル変数
   let point = 0;
   let result = [];
@@ -320,6 +320,6 @@ game.onload = function startGame() {
   }
 
   ////////////////////////////////////////
-};
-
+}
+game.onload = startGame;
 game.start();

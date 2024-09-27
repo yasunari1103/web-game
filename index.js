@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  console.log(globalVars.maxNum);
   const target = document.body;
   //mutationobserverでDOMを監視
   const observer = new MutationObserver((mutations) => {
@@ -25,25 +26,40 @@ document.addEventListener("DOMContentLoaded", () => {
         div.appendChild(homeButton);
         div.appendChild(retryButton);
 
+        let styleImage = document.createElement("style");
+        styleImage.textContent =
+          "#resultScene img {display: block;height: 100%;width: 100%;}";
+        document.head.appendChild(styleImage);
+
         // styleの整理
         div.style.position = "relative";
         div.style.height = "100%";
-        homeButton.style.height = "5%";
+        homeButton.style.height = "8%";
         homeButton.style.padding = "0";
         homeButton.style.margin = "0";
         homeButton.style.backgroundColor = "rgba(0, 0, 0, 0)";
         homeButton.style.position = "absolute";
-        homeButton.style.left = "10%";
-        homeButton.style.top = "10%";
-        retryButton.style.height = "5%";
+        homeButton.style.left = "4%";
+        homeButton.style.top = "20%";
+        homeButton.style.border = "none";
+        retryButton.style.height = "8%";
         retryButton.style.padding = "0";
         retryButton.style.margin = "0";
         retryButton.style.backgroundColor = "rgba(0, 0, 0, 0)";
         retryButton.style.position = "absolute";
-        retryButton.style.left = "20%";
-        retryButton.style.top = "10%";
-        document.body.appendChild(div);
+        retryButton.style.left = "19%";
+        retryButton.style.top = "20%";
+        retryButton.style.border = "none";
+        homeButton.onclick = function () {
+          location.reload();
+        };
+        retryButton.onclick = function () {
+          const game = new Game(625, 441);
+          game.onload = startGame;
+          game.start();
+        };
 
+        document.body.appendChild(div);
         console.log("a");
       }
     });

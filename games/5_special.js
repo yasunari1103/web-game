@@ -1,5 +1,5 @@
 enchant();
-const aaa=globalVars.maxNum;
+const aaa = globalVars.maxNum;
 console.log(aaa);
 //画面サイズ,設定
 const game = new Game(625, 441);
