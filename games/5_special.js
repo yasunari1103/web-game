@@ -85,9 +85,6 @@ let point = 0;
 let result = [];
 game.onload = function startGame() {
   sdList = [sd0, sd1, sd2, sd3, sd4, sd5];
-  //グローバル変数
-  let point = 0;
-  let result = [];
 
   const mainScene = new Scene();
   game.pushScene(mainScene);
