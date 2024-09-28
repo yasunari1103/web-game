@@ -18,9 +18,37 @@ game.preload([incorrectSound]);
 //イラスト系統
 const gameBackGround = "背景素材/ゲーム画面.png"; // 7016 * 4961
 game.preload([gameBackGround]);
+///// sd
+sdListText = [
+  "sdキャラ素材/ジト目.png",
+  "sdキャラ素材/デフォルト.png",
+  "sdキャラ素材/にっこり.png",
+  "sdキャラ素材/焦り.png",
+  "sdキャラ素材/笑顔/png",
+  "sdキャラ素材/煽り.png",
+];
 
-const sd = "sdキャラ素材/焦り.png"; // 211 * 313
-game.preload([sd]);
+const sd0 = sdList[0]; // 211 * 313
+game.preload([sd0]);
+
+const sd1 = sdList[1]; // 211 * 313
+game.preload([sd1]);
+
+const sd2 = sdList[2]; // 211 * 313
+game.preload([sd2]);
+
+const sd3 = sdList[3]; // 211 * 313
+game.preload([sd3]);
+
+const sd4 = sdList[4]; // 211 * 313
+game.preload([sd4]);
+
+const sd5 = sdList[5]; // 211 * 313
+game.preload([sd5]);
+
+sdList = [sd0, sd1, sd2, sd3, sd4, sd5];
+
+///// sdここまで
 
 //ボタン系統
 const prime = "ボタン素材/素数.png"; // 2192 * 1450
@@ -35,7 +63,24 @@ game.preload([composite]);
 const compositeSelected = "ボタン素材/合成数(選択時).png"; // 2192 * 1450
 game.preload([compositeSelected]);
 
+const timeUpBackground = "背景素材/time up.png"; //7016 * 4961
+game.preload([timeUpBackground]);
+
+const timeUpRetry = "ボタン素材/timeUpボタン/retry.png"; // 1022 * 462
+game.preload([timeUpRetry]);
+
+const timeUpResult = "ボタン素材/timeUpボタン/result.png"; // 1022 * 462
+game.preload([timeUpResult]);
 //パーツ準備終わり
+////////////////////////////////////////
+
+// ランダムで整数を獲得する関数
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); // 上限は除き、下限は含む
+}
+
 ////////////////////////////////////////
 
 game.onload = function startGame() {
@@ -76,14 +121,6 @@ game.onload = function startGame() {
   pointLabel.font = "24px sans-serif";
   pointLabel.color = "white";
   mainScene.addChild(pointLabel);
-
-  ////////////////////////////////////////
-  // ランダムで整数を獲得する関数
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); // 上限は除き、下限は含む
-  }
 
   ////////////////////////////////////////
   //special modeの設定
@@ -386,7 +423,7 @@ game.onload = function startGame() {
   });
   /////////////////////////////////////////////////////////////////////////
   // カウントダウン表示
-  let countdown = 30;
+  let countdown = 1;
   const countdownLabel = new Label("" + countdown);
   countdownLabel.x = 102;
   countdownLabel.y = 43;
@@ -409,50 +446,70 @@ game.onload = function startGame() {
 
   // ゲーム終了時に呼ばれる関数
   function gameOver() {
-    // ゲーム終了シーンを表示するか、スコア表示などを行う
-    const gameOverScene = new Scene();
-    gameOverScene.backgroundColor = "red"; // ゲーム終了時に背景を赤にする例
+    const timeUpScene = new Scene();
 
-    //リザルト表示テキスト
-    resultText = "";
-    result.forEach((element) =>
-      Object.keys(element).forEach(function (value) {
-        resultText += value + ":" + this[value] + "  ";
-      }, element)
+    var BackGround = new Sprite(625, 441);
+    const surfaceBackGround = new Surface(625, 441); // 縮小後のサイズでSurfaceを作成
+    surfaceBackGround.draw(
+      game.assets[timeUpBackground],
+      0,
+      0,
+      702,
+      496,
+      0,
+      0,
+      625,
+      441
     );
-    const resultLabel = new Label(resultText);
-    resultLabel.x = 0;
-    resultLabel.y = 0;
-    gameOverScene.addChild(resultLabel);
+    BackGround.image = surfaceBackGround;
+    timeUpScene.addChild(BackGround);
 
-    //point表示テキスト
-    const label = new Label("Game Over! Your score: " + point);
-    label.x = 100;
-    label.y = 200;
-    gameOverScene.addChild(label);
+    var retryButton = new Sprite(250, 130);
+    const surfaceRetry = new Surface(250, 130);
+    surfaceRetry.draw(
+      game.assets[timeUpRetry],
+      0,
+      0,
+      1022,
+      462,
+      0,
+      0,
+      250,
+      130
+    );
+    retryButton.image = surfaceRetry;
+    retryButton.moveTo(45, 250);
+    timeUpScene.addChild(retryButton);
 
-    //同難易度ボタン
-    const againButton = new Label("again!");
-    againButton.x = 100;
-    againButton.y = 250;
-    gameOverScene.addChild(againButton);
-
-    //ホームに戻るボタン
-    const homebackButton = new Label("back to home");
-    homebackButton.x = 100;
-    homebackButton.y = 300;
-    gameOverScene.addChild(homebackButton);
-    game.replaceScene(gameOverScene); // ゲーム終了シーンに切り替える
-
-    //addEventListener系統
-    againButton.addEventListener("touchstart", function () {
-      // もう一度同じ難易度でゲームをスタートさせる処理
-      startGame();
-    });
-    homebackButton.addEventListener("touchstart", function () {
-      // ホーム画面に戻る処理
-      window.location.reload();
-    });
+    var resultButton = new Sprite(250, 130);
+    const surfaceResult = new Surface(250, 130);
+    surfaceResult.draw(
+      game.assets[timeUpResult],
+      0,
+      0,
+      1022,
+      463,
+      0,
+      0,
+      250,
+      130
+    );
+    resultButton.image = surfaceResult;
+    resultButton.moveTo(0, 0);
+    timeUpScene.addChild(resultButton);
+    /*
+    game.stop();
+    game.popScene();
+    let resultImage = document.createElement("img");
+    resultImage.src = "背景素材/result画面.png";
+    resultImage.id = "resultImage";
+    resultImage.style.width = "100%";
+    resultImage.style.padding = "0";
+    resultImage.style.margin = "0";
+    let body = document.body;
+    body.appendChild(resultImage);
+    */
+    game.replaceScene(timeUpScene);
   }
 
   ////////////////////////////////////////
