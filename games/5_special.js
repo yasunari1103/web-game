@@ -24,7 +24,7 @@ sdListText = [
   "sdキャラ素材/デフォルト.png",
   "sdキャラ素材/にっこり.png",
   "sdキャラ素材/焦り.png",
-  "sdキャラ素材/笑顔/png",
+  "sdキャラ素材/笑顔.png",
   "sdキャラ素材/煽り.png",
 ];
 
@@ -46,7 +46,7 @@ game.preload([sd4]);
 const sd5 = sdListText[5]; // 211 * 313
 game.preload([sd5]);
 
-sdList = [sd0, sd1, sd2, sd3, sd4, sd5];
+
 
 ///// sdここまで
 
@@ -84,6 +84,8 @@ function getRandomInt(min, max) {
 ////////////////////////////////////////
 
 game.onload = function startGame() {
+  
+  sdList = [sd0, sd1, sd2, sd3, sd4, sd5];
   //グローバル変数
   let point = 0;
   let result = [];
@@ -321,6 +323,7 @@ game.onload = function startGame() {
     setTimeout(() => {
       primeButton.image = surfacePrime;
       sdIllust.y += 10;
+      sdIllust.image=game.assets[sdList[getRandomInt(0,6)]];
     }, 100);
   });
   //Pキーが押されたら実行
@@ -353,6 +356,7 @@ game.onload = function startGame() {
         setTimeout(() => {
           primeButton.image = surfacePrime;
           sdIllust.y += 10;
+          sdIllust.image=game.assets[sdList[getRandomInt(0,6)]];
         }, 100);
       }
     }
@@ -385,6 +389,7 @@ game.onload = function startGame() {
     setTimeout(() => {
       compositeButton.image = surfaceComposite;
       sdIllust.y += 10;
+      sdIllust.image=game.assets[sdList[getRandomInt(0,6)]];
     }, 100);
   });
   //Cキーが押されたら実行
@@ -417,13 +422,14 @@ game.onload = function startGame() {
         setTimeout(() => {
           compositeButton.image = surfaceComposite;
           sdIllust.y += 10;
+          sdIllust.image=game.assets[sdList[getRandomInt(0,6)]];
         }, 100);
       }
     }
   });
   /////////////////////////////////////////////////////////////////////////
   // カウントダウン表示
-  let countdown = 1;
+  let countdown = 10;
   const countdownLabel = new Label("" + countdown);
   countdownLabel.x = 102;
   countdownLabel.y = 43;

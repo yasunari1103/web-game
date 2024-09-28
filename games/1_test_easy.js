@@ -284,7 +284,7 @@ function startGame() {
   });
   /////////////////////////////////////////////////////////////////////////
   // カウントダウン表示
-  let countdown = 2;
+  let countdown = 100;
   const countdownLabel = new Label("" + countdown);
   countdownLabel.x = 102;
   countdownLabel.y = 43;
