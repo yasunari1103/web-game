@@ -28,22 +28,22 @@ sdListText = [
   "sdキャラ素材/煽り.png",
 ];
 
-const sd0 = sdList[0]; // 211 * 313
+const sd0 = sdListText[0]; // 211 * 313
 game.preload([sd0]);
 
-const sd1 = sdList[1]; // 211 * 313
+const sd1 = sdListText[1]; // 211 * 313
 game.preload([sd1]);
 
-const sd2 = sdList[2]; // 211 * 313
+const sd2 = sdListText[2]; // 211 * 313
 game.preload([sd2]);
 
-const sd3 = sdList[3]; // 211 * 313
+const sd3 = sdListText[3]; // 211 * 313
 game.preload([sd3]);
 
-const sd4 = sdList[4]; // 211 * 313
+const sd4 = sdListText[4]; // 211 * 313
 game.preload([sd4]);
 
-const sd5 = sdList[5]; // 211 * 313
+const sd5 = sdListText[5]; // 211 * 313
 game.preload([sd5]);
 
 sdList = [sd0, sd1, sd2, sd3, sd4, sd5];
@@ -111,7 +111,7 @@ game.onload = function startGame() {
   //sdイラスト
   var sdIllust = new Sprite(211, 313);
   sdIllust.moveTo(15, 95);
-  sdIllust.image = game.assets[sd];
+  sdIllust.image = game.assets[sd1];
   mainScene.addChild(sdIllust);
 
   //ポイント表示
@@ -495,7 +495,7 @@ game.onload = function startGame() {
       130
     );
     resultButton.image = surfaceResult;
-    resultButton.moveTo(0, 0);
+    resultButton.moveTo(350, 250);
     timeUpScene.addChild(resultButton);
     /*
     game.stop();
