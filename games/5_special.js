@@ -82,12 +82,10 @@ function getRandomInt(min, max) {
 }
 
 ////////////////////////////////////////
-
+//グローバル変数
+let point = 0;
+let result = [];
 game.onload = function startGame() {
-  //グローバル変数
-  let point = 0;
-  let result = [];
-
   const mainScene = new Scene();
   game.pushScene(mainScene);
   mainScene.backgroundColor = "black";
@@ -423,7 +421,7 @@ game.onload = function startGame() {
   });
   /////////////////////////////////////////////////////////////////////////
   // カウントダウン表示
-  let countdown = 1;
+  let countdown = 10;
   const countdownLabel = new Label("" + countdown);
   countdownLabel.x = 102;
   countdownLabel.y = 43;
@@ -478,7 +476,7 @@ game.onload = function startGame() {
       130
     );
     retryButton.image = surfaceRetry;
-    retryButton.moveTo(45, 250);
+    retryButton.moveTo(50, 250);
     timeUpScene.addChild(retryButton);
 
     var resultButton = new Sprite(250, 130);
@@ -495,21 +493,28 @@ game.onload = function startGame() {
       130
     );
     resultButton.image = surfaceResult;
-    resultButton.moveTo(350, 250);
+    resultButton.moveTo(325, 250);
     timeUpScene.addChild(resultButton);
-    /*
-    game.stop();
-    game.popScene();
-    let resultImage = document.createElement("img");
-    resultImage.src = "背景素材/result画面.png";
-    resultImage.id = "resultImage";
-    resultImage.style.width = "100%";
-    resultImage.style.padding = "0";
-    resultImage.style.margin = "0";
-    let body = document.body;
-    body.appendChild(resultImage);
-    */
+
     game.replaceScene(timeUpScene);
+
+    retryButton.addEventListener("touchstart", function () {
+      // もう一度同じ難易度でゲームをスタートさせる処理
+      startGame();
+    });
+
+    resultButton.addEventListener("touchstart", function () {
+      game.stop();
+      game.popScene();
+      let resultImage = document.createElement("img");
+      resultImage.src = "背景素材/result画面.png";
+      resultImage.id = "resultImage";
+      resultImage.style.width = "100%";
+      resultImage.style.padding = "0";
+      resultImage.style.margin = "0";
+      let body = document.body;
+      body.appendChild(resultImage);
+    });
   }
 
   ////////////////////////////////////////
