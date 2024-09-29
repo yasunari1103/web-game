@@ -425,7 +425,7 @@ game.onload = function startGame() {
   });
   /////////////////////////////////////////////////////////////////////////
   // カウントダウン表示
-  let countdown = 10;
+  let countdown = 30;
   const countdownLabel = new Label("" + countdown);
   countdownLabel.x = 102;
   countdownLabel.y = 43;
