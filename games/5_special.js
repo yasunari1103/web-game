@@ -505,6 +505,7 @@ game.onload = function startGame() {
     retryButton.addEventListener("touchstart", function () {
       // もう一度同じ難易度でゲームをスタートさせる処理
       startGame();
+      point = 0;
     });
 
     resultButton.addEventListener("touchstart", function () {
