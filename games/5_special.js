@@ -9,10 +9,10 @@ game.fps = 30;
 //パーツ準備
 
 //音系統
-const correctSound = "SE/seikaiSE.wav";
+const correctSound = "SE/seikaiSE.mp3";
 game.preload([correctSound]);
 
-const incorrectSound = "SE/huseikaiSE.wav";
+const incorrectSound = "SE/huseikaiSE.mp3";
 game.preload([incorrectSound]);
 
 //イラスト系統
