@@ -506,6 +506,7 @@ game.onload = function startGame() {
       // もう一度同じ難易度でゲームをスタートさせる処理
       startGame();
       point = 0;
+      result = [];
     });
 
     resultButton.addEventListener("touchstart", function () {
